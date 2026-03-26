@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://syncify-pro-api.fly.dev',
+  apiUrl: 'https://my-backend.api.dev',
   staticHeaders: [
     { key: 'accept-language', value: 'en' }
   ]
