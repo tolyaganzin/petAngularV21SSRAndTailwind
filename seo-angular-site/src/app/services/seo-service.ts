@@ -1,19 +1,12 @@
 import { Injectable, signal } from '@angular/core';
 import { Title, Meta } from '@angular/platform-browser';
-
-export interface SeoOptions {
-  title: string;
-  description?: string | null; // null = remove tag
-  keywords?: string | null;
-  ogTitle?: string | null;
-  // you can extend with og:description, twitter:card, etc.
-}
+import { SeoOptions } from '../types-interfaces/seo';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SeoService {
-  public titleSignal = signal('My Angular SSR Site');
+  public titleSignal = signal('My Angular SEO SSR Site');
 
   // List of meta tags we manage
   private managedTags = [
@@ -24,11 +17,11 @@ export class SeoService {
 
   constructor(private title: Title, private meta: Meta) {}
 
-  /**
+  /*
    * Update page SEO.
    * If description/keywords/ogTitle are null, remove the tag.
-   */
-  updatePage(options: SeoOptions) {
+  */
+  public updatePage(options: SeoOptions) {
     // 1️⃣ Update the title
     this.title.setTitle(options.title);
     this.titleSignal.set(options.title);
@@ -39,9 +32,9 @@ export class SeoService {
     this.updateOrRemoveMeta('property', 'og:title', options.ogTitle);
   }
 
-  /**
+  /*
    * Update a single meta tag or remove it if null/empty.
-   */
+  */
   private updateOrRemoveMeta(attr: 'name' | 'property', value: string, content?: string | null) {
     const tag = this.meta.getTag(`${attr}="${value}"`);
     if (!content) {
@@ -57,11 +50,11 @@ export class SeoService {
     }
   }
 
-  /**
+  /*
    * Reset to "base tags" only
    * Useful for SPA pages where you don't want page-specific meta
-   */
-  resetToBase(base: Partial<SeoOptions> = { title: 'My Angular SSR Site' }) {
+  */
+  public resetToBase(base: Partial<SeoOptions> = { title: 'My Angular SSR Site' }) {
     this.updatePage({
       title: base.title || 'My Angular SSR Site',
       description: base.description || null,

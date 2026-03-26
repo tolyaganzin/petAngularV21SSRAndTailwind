@@ -10,7 +10,7 @@ import { SeoService } from '../../services/seo-service';
 export class About implements OnInit {
   public readonly seo = inject(SeoService);
 
-  ngOnInit() {
+  public ngOnInit() {
     this.seo.updatePage({
       title: 'About - My Angular SSR Site',
       description: 'Learn more about our company',

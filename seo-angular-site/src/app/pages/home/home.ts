@@ -10,7 +10,7 @@ import { SeoService } from '../../services/seo-service';
 export class Home implements OnInit {
   public readonly seo = inject(SeoService);
 
-  ngOnInit() {
+  public ngOnInit() {
     this.seo.updatePage({
       title: 'Home Page 234',
       description: 'This is the home page for SEO.',
